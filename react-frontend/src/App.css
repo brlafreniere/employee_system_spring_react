@@ -1,0 +1,20 @@
+html, body, #root, .App {
+    height: 100%;
+}
+
+#AppContainer {
+    min-height: 100%;
+    min-width: 100%;
+}
+
+main {
+    min-height: 100%;
+}
+
+#sidebar {
+    width: 300px;
+    margin: 0px;
+    padding: 0px;
+    background-color: #3258a8;
+    min-height: 100%;
+}
