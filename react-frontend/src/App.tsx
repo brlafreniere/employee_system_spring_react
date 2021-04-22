@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Route} from "react-router-dom"
+import {BrowserRouter as Router, Route, Link} from "react-router-dom"
 
 import './App.css';
 import './css/Sidebar.css'
@@ -20,14 +20,16 @@ const Sidebar = (props: any) => {
                     </h3>
                 </header>
 
-                <a className="link-light p-5" data-bs-toggle="collapse" href="#employeesMenu" aria-expanded="false" aria-controls="employeesMenu">
-                    Employees
-                </a>
-                <ul className="collapse list-unstyled" id="employeesMenu">
-                    <li>
-                        <a href="/employees" className="link-light p-5">All</a>
-                    </li>
-                </ul>
+                <div>
+                    <Link className="link-light sidebar-link" data-bs-toggle="collapse" to="#employeesMenu" aria-expanded="false">
+                        Employees
+                    </Link>
+                </div>
+                <div className="collapse list-unstyled" id="employeesMenu">
+                    <Link to="/employees" className="link-light sidebar-link">
+                        All
+                    </Link>
+                </div>
             </nav>
         </div>
     )
@@ -37,10 +39,9 @@ function App() {
     return (
         <div className="App">
             <div className="d-flex" id="AppContainer">
-                <Sidebar />
-                <main className="p-5">
-
-                    <Router>
+                <Router>
+                    <Sidebar />
+                    <main className="p-5">
                         <Route path="/" exact>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque placerat lectus vel dolor egestas placerat. Cras nec dictum dolor. Phasellus iaculis, nisi quis varius tristique, purus diam rhoncus tortor, ac aliquet nulla tellus sit amet arcu. In ut purus lacus. Integer efficitur urna augue, a maximus eros eleifend ac. Maecenas quis mollis ligula. Aliquam vulputate nibh pretium ante euismod fringilla. Cras lacinia ullamcorper est et dapibus.</p>
                             <p>Phasellus ornare maximus turpis. Nulla nec vestibulum dui. Praesent imperdiet elit id augue ultrices mollis. Etiam eu velit at diam lobortis hendrerit. Mauris id dignissim nunc. Ut nec dignissim ipsum, feugiat vulputate tortor. Integer sit amet placerat est, in tempor nisi. Sed urna quam, mattis ut lectus at, malesuada finibus nisi.</p>
@@ -59,8 +60,8 @@ function App() {
                             <p>Donec tincidunt purus sit amet lectus feugiat dapibus. Mauris at urna id nisl euismod cursus. Sed vulputate, leo vitae pellentesque efficitur, nulla sapien gravida sapien, in fringilla odio ante a ex. Maecenas a aliquam tellus, at tincidunt turpis. Integer quis tortor ultricies, ornare tortor in, tempor risus. Sed malesuada congue lacus, quis porta elit sagittis eget. Nullam massa nisi, interdum sed rhoncus et, dapibus fringilla elit.</p>
                         </Route>
                         <Route path="/employees" component={Employees} />
-                    </Router>
-                </main>
+                    </main>
+                </Router>
             </div>
         </div>
     );
