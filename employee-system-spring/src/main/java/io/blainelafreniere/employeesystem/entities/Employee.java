@@ -9,6 +9,7 @@ public class Employee {
     @Id @GeneratedValue private Long id;
     private String firstName;
     private String lastName;
+    private String phoneNumber;
 
     public Long getId() {
         return id;
@@ -32,5 +33,13 @@ public class Employee {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

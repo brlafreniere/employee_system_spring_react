@@ -1,4 +1,4 @@
-package io.blainelafreniere.employeesystem;
+package io.blainelafreniere.employeesystem.repositories;
 
 import io.blainelafreniere.employeesystem.entities.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
