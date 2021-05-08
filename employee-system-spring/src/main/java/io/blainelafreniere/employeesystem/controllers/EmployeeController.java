@@ -3,8 +3,11 @@ package io.blainelafreniere.employeesystem.controllers;
 import io.blainelafreniere.employeesystem.entities.Employee;
 import io.blainelafreniere.employeesystem.exceptions.EmployeeNotFoundException;
 import io.blainelafreniere.employeesystem.repositories.EmployeeRepository;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -27,8 +30,25 @@ public class EmployeeController {
     }
 
     @PostMapping
-    Employee createEmployee(@RequestBody Employee newEmployee) {
+    Employee createEmployee(@Valid @RequestBody Employee newEmployee, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+
+        }
         return employeeRepository.save(newEmployee);
+    }
+
+    @PutMapping("/{id}")
+    Employee updateEmployee(@Valid @RequestBody Employee newEmployee, @PathVariable Long id) {
+        return employeeRepository.findById(id)
+            .map(employee -> {
+                employee.setFirstName(newEmployee.getFirstName());
+                employee.setLastName(newEmployee.getLastName());
+                employee.setPhoneNumber(newEmployee.getPhoneNumber());
+                return employeeRepository.save(employee);
+            }).orElseGet(() -> {
+                newEmployee.setId(id);
+                return employeeRepository.save(newEmployee);
+            });
     }
 
     @DeleteMapping("/{id}")

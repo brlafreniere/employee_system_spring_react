@@ -3,12 +3,20 @@ package io.blainelafreniere.employeesystem.entities;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Employee {
-    @Id @GeneratedValue private Long id;
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @NotNull
     private String firstName;
+
+    @NotNull
     private String lastName;
+
     private String phoneNumber;
 
     public Long getId() {
