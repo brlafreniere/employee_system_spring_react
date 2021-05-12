@@ -8,7 +8,8 @@ This software is built using the Spring framework, with a React front-end.
 
 ## Launching the application
 
-To run the application, clone the project somewhere locally, and you can either:
+To run the Spring backend, the easiest way would be to open the project in an IDE such as IntelliJ, and just use the Maven command `mvn spring-boot:run`
 
-1. Run the project from an IDE such as IntelliJ
-2. Build a "fat jar" and run the Spring backend via CLI: `java -jar ./project/target/employee-system.x.x.x.jar`
+To run the React front-end, you can simply use `npm start` to load the development server.
+
+Spring will run on port 5000, and the frontend is configured to communicate with the backend via port 5000.
