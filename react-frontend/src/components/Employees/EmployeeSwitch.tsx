@@ -10,9 +10,10 @@ import EmployeeForm from "./EmployeeForm"
 const EmployeeSwitch = (props: any) => {
     return (
         <div>
-            <ul className="nav nav-pills">
+            <h3 className="mb-5">Employees</h3>
+            <ul className="nav nav-tabs">
                 <li className="nav-item">
-                    <NavLink exact to="/employees" className="nav-link" activeClassName="active">List</NavLink>
+                    <NavLink exact to="/employees" className="nav-link" activeClassName="active">All</NavLink>
                 </li>
                 <li className="nav-item">
                     <NavLink exact to="/employees/new" className="nav-link" activeClassName="active">New</NavLink>

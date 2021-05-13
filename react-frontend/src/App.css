@@ -11,6 +11,10 @@ main {
     min-height: 100%;
 }
 
+label {
+    margin-bottom: 1em;
+}
+
 #sidebar {
     width: 300px;
     margin: 0px;

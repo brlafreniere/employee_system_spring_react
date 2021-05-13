@@ -20,7 +20,9 @@ const Sidebar = (props: any) => {
                 <header className="p-5">
                     <h3 className="text-white">
                         <a href="/" className="link-light">
-                            Employee Management System
+                            <div><span className="text-monospace">E</span>mployee</div>
+                            <div><span className="text-monospace">M</span>anagement</div>
+                            <div><span className="text-monospace">S</span>ystem</div>
                         </a>
                     </h3>
                 </header>

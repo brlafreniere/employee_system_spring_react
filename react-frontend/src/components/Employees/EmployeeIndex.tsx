@@ -37,9 +37,9 @@ const EmployeesIndex = (props: any) => {
 
     return (
         <Card>
-            <table className="table table-bordered">
+            <table className="table table-bordered" style={{tableLayout: 'fixed'}}>
                 <thead className="thead-light">
-                    <tr>
+                    <tr className="bg-light">
                         <th>Name</th>
                         <th>Actions</th>
                     </tr>
