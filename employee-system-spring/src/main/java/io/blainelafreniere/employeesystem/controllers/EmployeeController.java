@@ -1,5 +1,6 @@
 package io.blainelafreniere.employeesystem.controllers;
 
+import io.blainelafreniere.employeesystem.entities.Department;
 import io.blainelafreniere.employeesystem.entities.Employee;
 import io.blainelafreniere.employeesystem.exceptions.EmployeeNotFoundException;
 import io.blainelafreniere.employeesystem.repositories.EmployeeRepository;
@@ -31,9 +32,6 @@ public class EmployeeController {
 
     @PostMapping
     Employee createEmployee(@Valid @RequestBody Employee newEmployee, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-
-        }
         return employeeRepository.save(newEmployee);
     }
 
