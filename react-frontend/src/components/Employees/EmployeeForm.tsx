@@ -14,9 +14,7 @@ const DepartmentSelect = (props: any) => {
     const [departments, setDepartments] = useState([])
 
     useEffect(() => {
-        axios({
-            url: `${process.env.REACT_APP_API_URL}/departments`
-        }).then(response => {
+        axios({url: `${process.env.REACT_APP_API_URL}/departments`}).then(response => {
             setDepartments(response.data)
         })
     }, [])
@@ -26,23 +24,28 @@ const DepartmentSelect = (props: any) => {
     })
 
     return (
-        <Select options={options} onChange={props.onChange} required />
+        <Select {...props} options={options} />
     )
 }
 
 const EmployeeForm = (props: any) => {
     const {id} = useParams<ParamsType>()
     const [employee, setEmployee] = useState<EmployeeType>({} as EmployeeType)
+    const [formDisabled, setFormDisabled] = useState(null)
     const history = useHistory()
     
+    // fetch and set employee state if an ID is present
     useEffect(() => {
         if (id) {
-            axios({
-                url: `${process.env.REACT_APP_API_URL}/employees/${id}`
-            }).then(response => {
+            axios({url: `${process.env.REACT_APP_API_URL}/employees/${id}`}).then(response => {
                 setEmployee(response.data)
             })
         }
+    }, [id])
+
+    // enable/disable form based on the presence of an ID
+    useEffect(() => {
+        id ? setFormDisabled(true) : setFormDisabled(false)
     }, [id])
 
     const handleSubmit = (event: any) => {
@@ -52,18 +55,32 @@ const EmployeeForm = (props: any) => {
             lastName: employee.lastName,
             phoneNumber: employee.phoneNumber,
             emailAddress: employee.emailAddress,
-            departmentId: employee.departmentId
+            department: {
+                id: employee.departmentId
+            }
         }
-        console.log(payload)
-        axios({
-            url: `${process.env.REACT_APP_API_URL}/employees`,
-            method: "post",
-            data: payload
-        }).then(response => {
-            history.push('/employees')
-        }).catch(error => {
-            console.log(error.response)
-        })
+
+        if (id) {
+            axios({
+                url: `${process.env.REACT_APP_API_URL}/employees`,
+                method: "put",
+                data: payload
+            }).then(response => {
+                history.push(`/employees/${id}`)
+            }).catch(error => {
+                console.log(error.response)
+            })
+        } else {
+            axios({
+                url: `${process.env.REACT_APP_API_URL}/employees`,
+                method: "post",
+                data: payload
+            }).then(response => {
+                history.push('/employees')
+            }).catch(error => {
+                console.log(error.response)
+            })
+        }
     }
 
     const setProperty = (obj) => {
@@ -75,6 +92,16 @@ const EmployeeForm = (props: any) => {
     return (
         <Card>
             <form onSubmit={handleSubmit} autoComplete="off">
+                {id && (
+                    <>
+                    <div className="row">
+                        <div className="col">
+                            <button type="button" className="btn btn-primary" onClick={() => setFormDisabled(false)}>Edit</button>
+                        </div>
+                    </div>
+                    <hr />
+                    </>
+                )}
                 <div className="row">
                     <div className="col">
                         <div className="form-group">
@@ -85,6 +112,7 @@ const EmployeeForm = (props: any) => {
                             onChange={(e) => {setProperty({firstName: e.target.value})}}
                             name="first_name"
                             required
+                            disabled={formDisabled}
                             className="form-control" />
                         </div>
                     </div>
@@ -97,6 +125,7 @@ const EmployeeForm = (props: any) => {
                             onChange={(e) => {setProperty({lastName: e.target.value})}}
                             name="last_name"
                             required
+                            disabled={formDisabled}
                             className="form-control" />
                         </div>
                     </div>
@@ -110,6 +139,7 @@ const EmployeeForm = (props: any) => {
                             name="phone_number"
                             value={employee.phoneNumber || ''}
                             onChange={(e) => {setProperty({phoneNumber: e.target.value})}}
+                            disabled={formDisabled}
                             className="form-control" />
                         </div>
                     </div>
@@ -124,6 +154,7 @@ const EmployeeForm = (props: any) => {
                             value={employee.emailAddress || ''}
                             onChange={(e) => {setProperty({emailAddress: e.target.value})}}
                             required
+                            disabled={formDisabled}
                             className="form-control" />
                         </div>
                     </div>
@@ -131,7 +162,11 @@ const EmployeeForm = (props: any) => {
                 <div className="row mt-3">
                     <div className="col-6">
                         <label>Department [<span className="text-danger">*</span>]</label>
-                        <DepartmentSelect onChange={(e) => setProperty({departmentId: e.value})} />
+                        <DepartmentSelect
+                        onChange={(e) => setProperty({departmentId: e.value})}
+                        isDisabled={formDisabled}
+                        required
+                        value={Object.keys(employee).length > 0 && {label: employee.department.name, value: employee.department.id}} />
                     </div>
                 </div>
                 <div className="mt-5">

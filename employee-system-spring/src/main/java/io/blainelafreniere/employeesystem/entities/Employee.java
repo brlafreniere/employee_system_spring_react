@@ -1,5 +1,9 @@
 package io.blainelafreniere.employeesystem.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,8 +28,7 @@ public class Employee {
     @Column(unique = true)
     private String emailAddress;
 
-    @ManyToOne
-    @JoinColumn(name="department_id")
+    @ManyToOne(fetch=FetchType.EAGER)
     private Department department;
 
     private String phoneNumber;

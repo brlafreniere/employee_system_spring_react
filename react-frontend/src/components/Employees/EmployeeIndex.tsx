@@ -4,9 +4,10 @@ import axios from "axios"
 
 import AppContext from "../../contexts/AppContext"
 import Card from "../Card"
+import EmployeeType from "../../types/EmployeeType"
 
 const EmployeesIndex = (props: any) => {
-    const [employees, setEmployees] = useState<any[]>([])
+    const [employees, setEmployees] = useState<EmployeeType[] | []>([])
     const appContext = useContext(AppContext)
 
     const fetchEmployees = () => {
@@ -14,6 +15,7 @@ const EmployeesIndex = (props: any) => {
             url: `${process.env.REACT_APP_API_URL}/employees`,
             method: 'get'
         }).then(response => {
+            console.log(response.data)
             setEmployees(response.data)
         }).catch(error => {
 
@@ -45,7 +47,7 @@ const EmployeesIndex = (props: any) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {employees && employees.map(employee => (
+                    {employees && employees.map((employee: EmployeeType) => (
                         <tr key={employee.id}>
                             <td>
                                 <Link to={`/employees/${employee.id}`}>

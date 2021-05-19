@@ -34,9 +34,7 @@ public class DepartmentController {
 
     @PostMapping
     Department createDepartment(@RequestBody Department newDepartment, BindingResult bindingResult) {
-        // this appears to throw a ConstraintViolationException
         if (bindingResult.hasErrors()) { }
-
         return departmentRepository.save(newDepartment);
     }
 

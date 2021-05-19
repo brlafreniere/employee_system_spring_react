@@ -22,12 +22,14 @@ public class EmployeeController {
 
     @GetMapping
     List<Employee> all() {
-        return employeeRepository.findAll();
+        List<Employee> employees = employeeRepository.findAll();
+        return employees;
     }
 
     @GetMapping("/{id}")
     Employee show(@PathVariable(value="id") Long id) {
-        return employeeRepository.findById(id).orElseThrow(() -> new EmployeeNotFoundException(id));
+        Employee employee = employeeRepository.findById(id).orElseThrow(() -> new EmployeeNotFoundException(id));
+        return employee;
     }
 
     @PostMapping
@@ -42,6 +44,7 @@ public class EmployeeController {
                 employee.setFirstName(newEmployee.getFirstName());
                 employee.setLastName(newEmployee.getLastName());
                 employee.setPhoneNumber(newEmployee.getPhoneNumber());
+                employee.setDepartment(newEmployee.getDepartment());
                 return employeeRepository.save(employee);
             }).orElseGet(() -> {
                 newEmployee.setId(id);
