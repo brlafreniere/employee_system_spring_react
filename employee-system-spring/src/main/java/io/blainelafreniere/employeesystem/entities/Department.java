@@ -14,7 +14,7 @@ import java.util.Set;
 @Getter
 @Setter
 public class Department {
-    @Id @GeneratedValue private Long id;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
     private String name;
 
     @JsonIgnore
