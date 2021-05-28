@@ -1,0 +1,6 @@
+The CrudIndex component is an attempt to generalize and abstract the logic that
+is essentially repeated for any kind of database entity (employee, task,
+department, etc.)
+
+This is a component where the CRUD operations can be consistently defined in one
+place. They are practically the same across entities.

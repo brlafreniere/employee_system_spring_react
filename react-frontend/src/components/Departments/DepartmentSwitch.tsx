@@ -7,8 +7,8 @@ import DepartmentForm from "./DepartmentForm"
 
 const DepartmentSwitch = (props: Object) => {
     return (
-        <div className="text-center">
-            <h3 className="mb-5">Departments</h3>
+        <div className="">
+            <h3 className="mb-5 text-center">Departments</h3>
             <ul className="nav nav-tabs">
                 <li className="nav-item">
                     <NavLink exact to="/departments" className="nav-link" activeClassName="active">All</NavLink>

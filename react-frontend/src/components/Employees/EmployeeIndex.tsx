@@ -5,66 +5,42 @@ import axios from "axios"
 import AppContext from "../../contexts/AppContext"
 import Card from "../Card"
 import EmployeeType from "../../types/EmployeeType"
+import CrudIndex from "../Crud/CrudIndex"
 
-const EmployeesIndex = (props: any) => {
-    const [employees, setEmployees] = useState<EmployeeType[] | []>([])
-    const appContext = useContext(AppContext)
+const EmployeeIndex = (props: any) => {
+    const thead = () => (
+        <>
+            <th style={{width: "4%"}} className="text-center"></th>
+            <th>Name</th>
+            <th>Department</th>
+        </>
+    )
 
-    const fetchEmployees = () => {
-        axios({
-            url: `${process.env.REACT_APP_API_URL}/employees`,
-            method: 'get'
-        }).then(response => {
-            console.log(response.data)
-            setEmployees(response.data)
-        }).catch(error => {
-
-        })
-    }
-
-    useEffect(() => {
-        fetchEmployees()
-    }, [])
-
-    const deleteEmployee = (employeeId: number) => {
-        axios({
-            url: `${process.env.REACT_APP_API_URL}/employees/${employeeId}`,
-            method: 'delete'
-        }).then(response => {
-            fetchEmployees()
-        }).catch(error => {
-            appContext.setAlert({type: "danger", text: "Failed to delete employee."})
-        })
-    }
+    const tbody = (records, toggleSelected) => (
+        <>
+            {records && records.map((record: any) => (
+                <tr key={record.id}>
+                    <td className="text-center">
+                        <div className="d-flex justify-content-center align-items-center pt-2">
+                            <input type="checkbox" className="w-auto" onClick={(e) => {toggleSelected(e, record)}} />
+                        </div>
+                    </td>
+                    <td>
+                        <Link to={`/employees/${record.id}`}>
+                            {record.firstName} {record.lastName}
+                        </Link>
+                    </td>
+                    <td>
+                        {record.department.name}
+                    </td>
+                </tr>
+            ))}
+        </>
+    )
 
     return (
-        <Card>
-            <table className="table table-bordered" style={{tableLayout: 'fixed'}}>
-                <thead className="thead-light">
-                    <tr className="bg-light">
-                        <th>Name</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {employees && employees.map((employee: EmployeeType) => (
-                        <tr key={employee.id}>
-                            <td>
-                                <Link to={`/employees/${employee.id}`}>
-                                    {employee.firstName} {employee.lastName}
-                                </Link>
-                            </td>
-                            <td>
-                                <button className="btn btn-danger btn-sm" onClick={() => deleteEmployee(employee.id)}>
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </Card>
+        <CrudIndex tbody={tbody} thead={thead} recordsApiPath={"/employees"} />
     )
 }
 
-export default EmployeesIndex
+export default EmployeeIndex

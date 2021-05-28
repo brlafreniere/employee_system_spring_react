@@ -63,7 +63,8 @@ const DepartmentForm = (props: any) => {
         <Card>
             <form onSubmit={handleSubmit}>
                 <div className="row">
-                    <div className="col-6 col-push-3">
+                    <div className="col-3"></div>
+                    <div className="col-6">
                         <div className="form-group">
                             <label>Name [<span className="text-danger">*</span>]</label>
                             <input
