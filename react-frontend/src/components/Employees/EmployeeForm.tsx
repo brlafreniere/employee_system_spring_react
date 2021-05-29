@@ -27,26 +27,26 @@ const EmployeeForm = (props: any) => {
                     <div className="form-group">
                         <label>First Name [<span className="text-danger">*</span>]</label>
                         <input
-                        type="text"
-                        value={employee.firstName || ''}
-                        onChange={(e) => {setProperty({firstName: e.target.value})}}
-                        name="first_name"
-                        required
-                        disabled={formDisabled}
-                        className="form-control" />
+                            type="text"
+                            value={employee.firstName || ''}
+                            onChange={(e) => {setProperty({firstName: e.target.value})}}
+                            name="first_name"
+                            required
+                            disabled={formDisabled}
+                            className="form-control" />
                     </div>
                 </div>
                 <div className="col">
                     <div className="form-group">
                         <label>Last Name [<span className="text-danger">*</span>]</label>
                         <input
-                        type="text"
-                        value={employee.lastName || ''}
-                        onChange={(e) => {setProperty({lastName: e.target.value})}}
-                        name="last_name"
-                        required
-                        disabled={formDisabled}
-                        className="form-control" />
+                            type="text"
+                            value={employee.lastName || ''}
+                            onChange={(e) => {setProperty({lastName: e.target.value})}}
+                            name="last_name"
+                            required
+                            disabled={formDisabled}
+                            className="form-control" />
                     </div>
                 </div>
             </div>
@@ -55,12 +55,12 @@ const EmployeeForm = (props: any) => {
                     <div className="form-group">
                         <label>Phone Number:</label>
                         <input
-                        type="text"
-                        name="phone_number"
-                        value={employee.phoneNumber || ''}
-                        onChange={(e) => {setProperty({phoneNumber: e.target.value})}}
-                        disabled={formDisabled}
-                        className="form-control" />
+                            type="text"
+                            name="phone_number"
+                            value={employee.phoneNumber || ''}
+                            onChange={(e) => {setProperty({phoneNumber: e.target.value})}}
+                            disabled={formDisabled}
+                            className="form-control" />
                     </div>
                 </div>
             </div>
@@ -69,13 +69,13 @@ const EmployeeForm = (props: any) => {
                     <div className="form-group">
                         <label>Email Address [<span className="text-danger">*</span>]</label>
                         <input
-                        type="text"
-                        name="email_address"
-                        value={employee.emailAddress || ''}
-                        onChange={(e) => {setProperty({emailAddress: e.target.value})}}
-                        required
-                        disabled={formDisabled}
-                        className="form-control" />
+                            type="text"
+                            name="email_address"
+                            value={employee.emailAddress || ''}
+                            onChange={(e) => {setProperty({emailAddress: e.target.value})}}
+                            required
+                            disabled={formDisabled}
+                            className="form-control" />
                     </div>
                 </div>
             </div>
